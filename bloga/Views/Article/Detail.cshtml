@@ -1,0 +1,51 @@
+﻿@model bloga.Models.Entity.article
+@{
+    ViewBag.Title = Model.AHEADER;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    $(function () {
+        viewed = (id) => {
+            var link = "Article/Viewed/" + id;
+            $.ajax({
+                type: "GET",
+                url: link,
+                success: function (result) {
+
+                }
+            });
+        };
+    });
+</script>
+
+<div class="container">
+    <h1>@Model.AHEADER</h1>
+    <img src="@Model.article_image.BIG" class="embed-responsive" />
+    <p>@Model.ACONTENT</p>
+    <a href="/Category/Index/@Model.CATEGORYID"><h5>@Model.category.CNAME</h5></a>
+
+
+    <a href="#Yorum"><p>@Model.comments.Count() yorum</p></a>
+
+    @foreach (bloga.Models.Entity.label l in Model.labels)
+    {
+        <a href="/Label/Index/@l.LABELID">@l.LABELNAME</a>
+    }
+
+
+
+    @foreach (bloga.Models.Entity.comment comments in Model.comments)
+    {
+        <p>@comments.CCOMMENT</p>
+    }
+
+
+    @*<input type="text" name="username" placeholder="ad soyad girin" />
+        <input type="text" name="textarea" id="textarea" placeholder="yorum yazın" />
+
+        <input type="button" value="gönder" name="submit" />*@
+
+
+</div>
+

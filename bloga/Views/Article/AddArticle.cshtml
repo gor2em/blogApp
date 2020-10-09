@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "AddArticle";
+    Layout = "~/Views/Shared/_Panel.cshtml";
+}
+
+<form action="/Article/AddArticle" method="post" enctype="multipart/form-data">
+    <div class="col-lg-12">
+        <div class="row" style="padding:30px">
+            <input type="text" name="AHEADER" value="" placeholder="BAŞLIK" class="form-control" />
+            <input type="text" name="ACONTENT" value="" placeholder="İÇERİK" class="form-control" />
+            <select name="CATEGORYID" class="form-control">
+                @foreach (bloga.Models.Entity.category cat in ViewBag.Categories)
+                {
+                    <option value="@cat.CATEGORYID">@cat.CNAME</option>
+                }
+            </select>
+            <input type="file" name="IMAGE" value="" />
+            <input type="submit" name="name" value="Makaleyi Gönder" class="btn btn-success form-control" />
+        </div>
+    </div>
+</form>
+

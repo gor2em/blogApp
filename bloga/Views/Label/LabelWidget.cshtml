@@ -1,0 +1,11 @@
+﻿@model IEnumerable<bloga.Models.Entity.label>
+
+
+<h5>etiketler</h5>
+
+@foreach (bloga.Models.Entity.label l in Model)
+{
+    <a href="/Label/Index/@l.LABELID"><p>@l.LABELNAME (@l.articles.Count())</p></a>
+}
+
+

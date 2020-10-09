@@ -1,0 +1,16 @@
+﻿@model IEnumerable<bloga.Models.Entity.article>
+<div class="container">
+    <h5>popüler makaleler</h5>
+    @foreach (bloga.Models.Entity.article a in Model)
+    {
+
+        <img src="@a.article_image.MED" class="embed-responsive" />
+        <a href="/Article/Detail/@a.ARTICLEID"><p>@a.AHEADER</p></a>
+        <a href="/@Url"><p>@a.AHEADER</p></a>
+
+        <p>@a.ADATE.ToShortDateString()</p>
+        @*<p>@a.ALIKE</p>*@
+
+    }
+</div>
+

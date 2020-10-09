@@ -1,0 +1,48 @@
+﻿@model IEnumerable<bloga.Models.Entity.user>
+@{
+    ViewBag.Title = "wApproved";
+    Layout = "~/Views/Shared/_Panel.cshtml";
+}
+<style>
+    .table-striped {
+        background: #ededed;
+
+    }
+
+        .table-striped > tbody > tr:nth-of-type(2n+1) {
+            background: #ccc;
+        }
+        .table-header-color{
+            color:#f1f1f1;
+        }
+</style>
+
+<table class="table table-striped table-bordered text-center">
+    <thead class="table-header-color">
+        <tr style="background:url('../../Content/images/background/13.jpg')">
+            <td>UID</td>
+            <td>Kullanıcı Adı</td>
+            <td>Email</td>
+            <td>Kayıt Tarihi</td>
+            <td>Durum</td>
+            <td>Güncelle</td>
+            @*<td>Sil</td>*@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (bloga.Models.Entity.user u in Model)
+        {
+            <tr>
+                <td>@u.USERID</td>
+                @*<td><a href="/User/Profil/@u.UserId" class="label label-default">@uye.UserName</a></td>*@
+                <td>@u.USERNAME</td>
+                <td>@u.USEREMAIL</td>
+                <td>@u.DATEOFREGISTRATION</td>
+                <td>@u.APPROVED</td>
+                <td><a href="/Admin/wRole/@u.USERID" class="btn btn-warning">Onayla</a></td>
+            </tr>
+
+        }
+
+    </tbody>
+</table>

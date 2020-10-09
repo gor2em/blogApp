@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "SignUp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form action="/User/SignUp" method="post">
+    <div class="col-lg-12">
+        <div class="row" style="padding:30px">
+            <input type="text" name="USERNAME" value="" placeholder="kullanıcı adınız..." class="form-control" required  />
+            <input type="text" name="NAME" value="" placeholder="adınız..." class="form-control" required />
+            <input type="text" name="LASTNAME" value="" placeholder="soyadınız..." class="form-control" required />
+            <input type="password" name="PASSWORD" value="" placeholder="şifre..." class="form-control" required minlength="3" />
+            <input type="email" name="USEREMAIL" value="" placeholder="mail adresiniz..." class="form-control" required />
+            <input type="submit" name="name" value="Üye Ol" class="btn btn-success form-control" />
+
+            @Html.ValidationMessage("Error", null, new { @class = "text text-danger" })
+        </div>
+        </div>
+</form>

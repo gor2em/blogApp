@@ -1,0 +1,112 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width" />
+
+    <!--fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
+    <!--/fonts-->
+
+    <title>@ViewBag.Title</title>
+
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    @*@Styles.Render("~/bundles/css")*@
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/fonts.css" rel="stylesheet" />
+    <link href="~/Content/main.css" rel="stylesheet" />
+</head>
+<body>
+
+
+    <div class="sidenav">
+        <a href="/Home"><img src="~/Content/images/logo/logo_yesil.png" /></a>
+        <a href="#about">hakkımda</a>
+        <a href="#services">makale</a>
+        <a href="#clients">geçmişten bir şey</a>
+        <a href="#contact">bir şeyler öner</a>
+        <a href="#contact">test et</a>
+        <a href="#contact">iletişim</a>
+        <hr />
+        @if (User.IsInRole("Yazar"))
+        {
+            <a href="#" class="btn btn-dark text-info" >Makale Ekle</a>
+        }
+
+        @if (User.IsInRole("Üye") && Convert.ToBoolean(Session["WRITER"]))
+        {
+            <p class="btn text-dark disabled">yazarlık için onay bekleniyor</p>
+        }
+        else if (User.IsInRole("Üye"))
+        {
+            <a href="/Writer/WriterON" class="btn btn-dark text-info">Yazar Ol</a>
+        }
+
+
+
+        @*<p class="text-dark text-center" style="margin-top:50px">designed by glory</p>*@
+    </div>
+    <div class="topnav">
+        <div class="">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-9">
+
+                    </div>
+                    <div class="col-lg-3 text-center">
+                       @Html.Partial("_LoginPartial")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="col-lg-12">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10">
+                        @RenderBody()
+                    </div>
+                    <div class="col-lg-2 right-main">
+                        @{
+                            Html.RenderAction("PopularArticle", "Home");
+                        }
+                        <hr />
+                        @{
+                            Html.RenderPartial("_Find");
+                        }
+                        <hr />
+                        @{
+                            Html.RenderAction("CategoryWidget", "Category");
+                        }
+                        <hr />
+                        @{
+                            Html.RenderAction("LabelWidget", "Label");
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="footer">
+                <p>tüm hakları saklıdır © @DateTime.UtcNow.Year <br /> designed by glory</p>
+            </div>*@
+    </div>
+
+    @*@Scripts.Render("~/bundles/scripts")*@
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/main.js"></script>
+    @RenderSection("scripts", false)
+</body>
+</html>

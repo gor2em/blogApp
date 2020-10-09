@@ -1,0 +1,54 @@
+﻿@{
+    Layout = null;
+}
+<script>
+    $(function () {
+        $("a.like").click(function () {
+            var id = $(this).data("id");
+            var link = "/Article/Like/" + id;
+            $.ajax({
+                type: "GET",
+                url: link,
+                success: function (result) {
+                    $("a.like").html("Beğen (" + result + ")");
+                }
+            });
+        });
+    });
+</script>
+@model IEnumerable<bloga.Models.Entity.article>
+
+@helper contentSub(string text)
+{
+    if (text.Length > 300)
+    {
+        @text.Substring(0, 300)
+    }
+    else
+    {
+        @text
+    }
+}
+
+
+
+@foreach (bloga.Models.Entity.article a in Model)
+{
+    <div id="article-content">
+        <div class="row">
+            <div class="col-lg-3" id="lineH">
+                <img src="@a.article_image.MED" class="embed-responsive rounded" />
+            </div>
+            <div class="col-lg-9" id="lineH">
+                <h1 class="text-white">@a.AHEADER</h1>
+                <p>tarih:@a.ADATE.ToShortDateString()  <a class="like text-danger" href="javascript:void(0)" data-id="@a.ARTICLEID">beğen(@a.ALIKE)</a>  görüntülenme: @a.AVIEW</p>
+
+                <p class="text-success">@a.category.CNAME</p>
+
+            </div>
+            <p class="text-justify">@contentSub(a.ACONTENT)...  <a href="/Article/Detail/@a.ARTICLEID">devamını oku</a></p>
+        </div>
+        </div>
+        }
+
+

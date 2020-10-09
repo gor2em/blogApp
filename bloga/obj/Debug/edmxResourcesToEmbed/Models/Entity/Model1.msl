@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="blogaDBModelStoreContainer" CdmEntityContainer="blogaDBEntities">
+    <EntitySetMapping Name="articles">
+      <EntityTypeMapping TypeName="blogaDBModel.article">
+        <MappingFragment StoreEntitySet="article">
+          <ScalarProperty Name="ARTICLEID" ColumnName="ARTICLEID" />
+          <ScalarProperty Name="AHEADER" ColumnName="AHEADER" />
+          <ScalarProperty Name="ACONTENT" ColumnName="ACONTENT" />
+          <ScalarProperty Name="ADATE" ColumnName="ADATE" />
+          <ScalarProperty Name="AVIEW" ColumnName="AVIEW" />
+          <ScalarProperty Name="ALIKE" ColumnName="ALIKE" />
+          <ScalarProperty Name="WRITERID" ColumnName="WRITERID" />
+          <ScalarProperty Name="CATEGORYID" ColumnName="CATEGORYID" />
+          <ScalarProperty Name="IMAGEID" ColumnName="IMAGEID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="article_image">
+      <EntityTypeMapping TypeName="blogaDBModel.article_image">
+        <MappingFragment StoreEntitySet="article_image">
+          <ScalarProperty Name="IMAGEID" ColumnName="IMAGEID" />
+          <ScalarProperty Name="MINI" ColumnName="MINI" />
+          <ScalarProperty Name="MED" ColumnName="MED" />
+          <ScalarProperty Name="BIG" ColumnName="BIG" />
+          <ScalarProperty Name="VIDEO" ColumnName="VIDEO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="categories">
+      <EntityTypeMapping TypeName="blogaDBModel.category">
+        <MappingFragment StoreEntitySet="category">
+          <ScalarProperty Name="CATEGORYID" ColumnName="CATEGORYID" />
+          <ScalarProperty Name="CNAME" ColumnName="CNAME" />
+          <ScalarProperty Name="CCONTENT" ColumnName="CCONTENT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="comments">
+      <EntityTypeMapping TypeName="blogaDBModel.comment">
+        <MappingFragment StoreEntitySet="comment">
+          <ScalarProperty Name="COMMENTID" ColumnName="COMMENTID" />
+          <ScalarProperty Name="CCOMMENT" ColumnName="CCOMMENT" />
+          <ScalarProperty Name="CDATE" ColumnName="CDATE" />
+          <ScalarProperty Name="CNAME" ColumnName="CNAME" />
+          <ScalarProperty Name="CLIKE" ColumnName="CLIKE" />
+          <ScalarProperty Name="ARTICLEID" ColumnName="ARTICLEID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="labels">
+      <EntityTypeMapping TypeName="blogaDBModel.label">
+        <MappingFragment StoreEntitySet="label">
+          <ScalarProperty Name="LABELID" ColumnName="LABELID" />
+          <ScalarProperty Name="LABELNAME" ColumnName="LABELNAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="roles">
+      <EntityTypeMapping TypeName="blogaDBModel.role">
+        <MappingFragment StoreEntitySet="role">
+          <ScalarProperty Name="ROLEID" ColumnName="ROLEID" />
+          <ScalarProperty Name="ROLENAME" ColumnName="ROLENAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="blogaDBModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="blogaDBModel.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="LASTNAME" ColumnName="LASTNAME" />
+          <ScalarProperty Name="USEREMAIL" ColumnName="USEREMAIL" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="BIO" ColumnName="BIO" />
+          <ScalarProperty Name="DATEOFREGISTRATION" ColumnName="DATEOFREGISTRATION" />
+          <ScalarProperty Name="IMAGEID" ColumnName="IMAGEID" />
+          <ScalarProperty Name="WRITER" ColumnName="WRITER" />
+          <ScalarProperty Name="APPROVED" ColumnName="APPROVED" />
+          <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_image">
+      <EntityTypeMapping TypeName="blogaDBModel.user_image">
+        <MappingFragment StoreEntitySet="user_image">
+          <ScalarProperty Name="IMAGEID" ColumnName="IMAGEID" />
+          <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_role">
+      <EntityTypeMapping TypeName="blogaDBModel.user_role">
+        <MappingFragment StoreEntitySet="user_role">
+          <ScalarProperty Name="USERROLID" ColumnName="USERROLID" />
+          <ScalarProperty Name="ROLEID" ColumnName="ROLEID" />
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="article_label" TypeName="blogaDBModel.article_label" StoreEntitySet="article_label">
+      <EndProperty Name="article">
+        <ScalarProperty Name="ARTICLEID" ColumnName="ARTICLEID" />
+      </EndProperty>
+      <EndProperty Name="label">
+        <ScalarProperty Name="LABELID" ColumnName="LABELID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="f_writer" TypeName="blogaDBModel.f_writer" StoreEntitySet="f_writer">
+      <EndProperty Name="user">
+        <ScalarProperty Name="USERID" ColumnName="WRITERID" />
+      </EndProperty>
+      <EndProperty Name="user1">
+        <ScalarProperty Name="USERID" ColumnName="USERID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

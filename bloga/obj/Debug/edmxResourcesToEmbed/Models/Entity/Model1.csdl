@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="blogaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="article">
+    <Key>
+      <PropertyRef Name="ARTICLEID" />
+    </Key>
+    <Property Name="ARTICLEID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AHEADER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ACONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ADATE" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="AVIEW" Type="Int32" Nullable="false" />
+    <Property Name="ALIKE" Type="Int32" Nullable="false" />
+    <Property Name="WRITERID" Type="Int32" Nullable="false" />
+    <Property Name="CATEGORYID" Type="Int32" Nullable="false" />
+    <Property Name="IMAGEID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="article_image" Relationship="Self.FK_article_article_image" FromRole="article" ToRole="article_image" />
+    <NavigationProperty Name="category" Relationship="Self.FK_article_category" FromRole="article" ToRole="category" />
+    <NavigationProperty Name="comments" Relationship="Self.FK_comment_article" FromRole="article" ToRole="comment" />
+    <NavigationProperty Name="labels" Relationship="Self.article_label" FromRole="article" ToRole="label" />
+  </EntityType>
+  <EntityType Name="article_image">
+    <Key>
+      <PropertyRef Name="IMAGEID" />
+    </Key>
+    <Property Name="IMAGEID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MINI" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MED" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="BIG" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="VIDEO" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="articles" Relationship="Self.FK_article_article_image" FromRole="article_image" ToRole="article" />
+    <NavigationProperty Name="users" Relationship="Self.FK_user_article_image" FromRole="article_image" ToRole="user" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="CATEGORYID" />
+    </Key>
+    <Property Name="CATEGORYID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CCONTENT" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="articles" Relationship="Self.FK_article_category" FromRole="category" ToRole="article" />
+  </EntityType>
+  <EntityType Name="comment">
+    <Key>
+      <PropertyRef Name="COMMENTID" />
+    </Key>
+    <Property Name="COMMENTID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CCOMMENT" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CDATE" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CLIKE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ARTICLEID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="article" Relationship="Self.FK_comment_article" FromRole="comment" ToRole="article" />
+  </EntityType>
+  <EntityType Name="label">
+    <Key>
+      <PropertyRef Name="LABELID" />
+    </Key>
+    <Property Name="LABELID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LABELNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="articles" Relationship="Self.article_label" FromRole="label" ToRole="article" />
+  </EntityType>
+  <EntityType Name="role">
+    <Key>
+      <PropertyRef Name="ROLEID" />
+    </Key>
+    <Property Name="ROLEID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ROLENAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="user_role" Relationship="Self.FK_user_role_role" FromRole="role" ToRole="user_role" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="USERID" />
+    </Key>
+    <Property Name="USERID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USERNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LASTNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="USEREMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PASSWORD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BIO" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="DATEOFREGISTRATION" Type="DateTime" Precision="0" />
+    <Property Name="IMAGEID" Type="Int32" />
+    <Property Name="WRITER" Type="Boolean" />
+    <Property Name="APPROVED" Type="Boolean" />
+    <Property Name="ACTIVE" Type="Boolean" />
+    <NavigationProperty Name="article_image" Relationship="Self.FK_user_article_image" FromRole="user" ToRole="article_image" />
+    <NavigationProperty Name="user_role" Relationship="Self.FK_user_role_user" FromRole="user" ToRole="user_role" />
+    <NavigationProperty Name="user1" Relationship="Self.f_writer" FromRole="user" ToRole="user1" />
+    <NavigationProperty Name="users" Relationship="Self.f_writer" FromRole="user1" ToRole="user" />
+  </EntityType>
+  <EntityType Name="user_image">
+    <Key>
+      <PropertyRef Name="IMAGEID" />
+    </Key>
+    <Property Name="IMAGEID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IMAGE" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="USERID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_role">
+    <Key>
+      <PropertyRef Name="ROLEID" />
+      <PropertyRef Name="USERID" />
+    </Key>
+    <Property Name="USERROLID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ROLEID" Type="Int32" Nullable="false" />
+    <Property Name="USERID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="role" Relationship="Self.FK_user_role_role" FromRole="user_role" ToRole="role" />
+    <NavigationProperty Name="user" Relationship="Self.FK_user_role_user" FromRole="user_role" ToRole="user" />
+  </EntityType>
+  <Association Name="FK_article_article_image">
+    <End Role="article_image" Type="Self.article_image" Multiplicity="1" />
+    <End Role="article" Type="Self.article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="article_image">
+        <PropertyRef Name="IMAGEID" />
+      </Principal>
+      <Dependent Role="article">
+        <PropertyRef Name="IMAGEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_article_category">
+    <End Role="category" Type="Self.category" Multiplicity="1" />
+    <End Role="article" Type="Self.article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="CATEGORYID" />
+      </Principal>
+      <Dependent Role="article">
+        <PropertyRef Name="CATEGORYID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_comment_article">
+    <End Role="article" Type="Self.article" Multiplicity="1" />
+    <End Role="comment" Type="Self.comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="article">
+        <PropertyRef Name="ARTICLEID" />
+      </Principal>
+      <Dependent Role="comment">
+        <PropertyRef Name="ARTICLEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_article_image">
+    <End Role="article_image" Type="Self.article_image" Multiplicity="0..1" />
+    <End Role="user" Type="Self.user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="article_image">
+        <PropertyRef Name="IMAGEID" />
+      </Principal>
+      <Dependent Role="user">
+        <PropertyRef Name="IMAGEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_role_role">
+    <End Role="role" Type="Self.role" Multiplicity="1" />
+    <End Role="user_role" Type="Self.user_role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="role">
+        <PropertyRef Name="ROLEID" />
+      </Principal>
+      <Dependent Role="user_role">
+        <PropertyRef Name="ROLEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_role_user">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="user_role" Type="Self.user_role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="USERID" />
+      </Principal>
+      <Dependent Role="user_role">
+        <PropertyRef Name="USERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="article_label">
+    <End Role="article" Type="Self.article" Multiplicity="*" />
+    <End Role="label" Type="Self.label" Multiplicity="*" />
+  </Association>
+  <Association Name="f_writer">
+    <End Role="user" Type="Self.user" Multiplicity="*" />
+    <End Role="user1" Type="Self.user" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="blogaDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="articles" EntityType="Self.article" />
+    <EntitySet Name="article_image" EntityType="Self.article_image" />
+    <EntitySet Name="categories" EntityType="Self.category" />
+    <EntitySet Name="comments" EntityType="Self.comment" />
+    <EntitySet Name="labels" EntityType="Self.label" />
+    <EntitySet Name="roles" EntityType="Self.role" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <EntitySet Name="user_image" EntityType="Self.user_image" />
+    <EntitySet Name="user_role" EntityType="Self.user_role" />
+    <AssociationSet Name="FK_article_article_image" Association="Self.FK_article_article_image">
+      <End Role="article_image" EntitySet="article_image" />
+      <End Role="article" EntitySet="articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_article_category" Association="Self.FK_article_category">
+      <End Role="category" EntitySet="categories" />
+      <End Role="article" EntitySet="articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_comment_article" Association="Self.FK_comment_article">
+      <End Role="article" EntitySet="articles" />
+      <End Role="comment" EntitySet="comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_article_image" Association="Self.FK_user_article_image">
+      <End Role="article_image" EntitySet="article_image" />
+      <End Role="user" EntitySet="users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_role_role" Association="Self.FK_user_role_role">
+      <End Role="role" EntitySet="roles" />
+      <End Role="user_role" EntitySet="user_role" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_role_user" Association="Self.FK_user_role_user">
+      <End Role="user" EntitySet="users" />
+      <End Role="user_role" EntitySet="user_role" />
+    </AssociationSet>
+    <AssociationSet Name="article_label" Association="Self.article_label">
+      <End Role="article" EntitySet="articles" />
+      <End Role="label" EntitySet="labels" />
+    </AssociationSet>
+    <AssociationSet Name="f_writer" Association="Self.f_writer">
+      <End Role="user" EntitySet="users" />
+      <End Role="user1" EntitySet="users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

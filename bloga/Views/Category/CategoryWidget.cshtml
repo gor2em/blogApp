@@ -1,0 +1,8 @@
+﻿@model IEnumerable<bloga.Models.Entity.category>
+
+    <h5>kategoriler</h5>
+
+    @foreach (bloga.Models.Entity.category c in Model)
+    {
+    <a href="/Category/Index/@c.CATEGORYID"><p>@c.CNAME (@c.articles.Count)</p></a>
+    }
